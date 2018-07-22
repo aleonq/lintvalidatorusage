@@ -20,7 +20,6 @@ public class NamingPatternDetector extends Detector implements Detector.UastScan
         return types;
     }
 
-
     @Nullable
     @Override
     public UElementHandler createUastHandler(JavaContext context) {

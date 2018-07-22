@@ -14,9 +14,10 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class MyIssueRegistry extends IssueRegistry {
+
     static final Issue ISSUE_NAMING_PATTERN = Issue.create("NamingPattern",
             "Names should be well named.",
-            "Some long description about this issue",
+            "Camel case notations should be followed in Java and Kotlin files",
             Category.CORRECTNESS,
             5,
             Severity.WARNING,
