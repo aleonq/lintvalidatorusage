@@ -1,0 +1,26 @@
+apply plugin: 'java-library'
+
+configurations {
+    lintChecks
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly "com.android.tools.lint:lint-api:26.2.0-beta01"
+    compileOnly "com.android.tools.lint:lint-checks:26.2.0-beta01"
+    lintChecks files(jar)
+}
+jar {
+    manifest {
+        attributes("Lint-Registry-v2": "apps.aleonqe.com.lintvalidator.MyIssueRegistry")
+    }
+}
+sourceCompatibility = "7"
+targetCompatibility = "7"
+
+defaultTasks 'assemble'
+
+task install(type: Copy, dependsOn: build) {
+    from configurations.lintChecks
+    into System.getProperty('user.home') + '/.android/lint/'
+}
