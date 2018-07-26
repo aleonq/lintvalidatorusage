@@ -1,14 +1,17 @@
-package apps.aleonqe.com.lintvalidator;
+package apps.aleonqe.com.lintvalidator.correctness;
 
 import com.android.tools.lint.client.api.UElementHandler;
 import com.android.tools.lint.detector.api.JavaContext;
 
 import org.jetbrains.uast.UClass;
 
-class NamingPatternHandler extends UElementHandler {
+import static apps.aleonqe.com.lintvalidator.correctness.Constants.BRIEF_DESCRIPTION;
+import static apps.aleonqe.com.lintvalidator.correctness.Constants.ISSUE_NAMING_PATTERN;
+
+public class NamingPatternHandler extends UElementHandler {
     private JavaContext context;
 
-    NamingPatternHandler(JavaContext context) {
+    public NamingPatternHandler(JavaContext context) {
         this.context = context;
     }
 
@@ -18,13 +21,13 @@ class NamingPatternHandler extends UElementHandler {
             return;
         }
         if (!isDefinedCamelCase(clazz.getName())) {
-            context.report(MyIssueRegistry.ISSUE_NAMING_PATTERN, clazz,
+            context.report(ISSUE_NAMING_PATTERN, clazz,
                     context.getNameLocation(clazz),
-                    "Not named in defined camel case.");
+                    BRIEF_DESCRIPTION);
         }
     }
 
-    boolean isDefinedCamelCase(String name) {
+    public boolean isDefinedCamelCase(String name) {
         char[] charArray = name.toCharArray();
         if (Character.isLowerCase(charArray[0])) {
             return false;

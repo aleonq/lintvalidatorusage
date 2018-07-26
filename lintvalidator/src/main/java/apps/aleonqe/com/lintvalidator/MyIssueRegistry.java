@@ -1,29 +1,18 @@
 package apps.aleonqe.com.lintvalidator;
 
 import com.android.tools.lint.client.api.IssueRegistry;
-import com.android.tools.lint.detector.api.Category;
-import com.android.tools.lint.detector.api.Implementation;
 import com.android.tools.lint.detector.api.Issue;
-import com.android.tools.lint.detector.api.Scope;
-import com.android.tools.lint.detector.api.Severity;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
-import java.util.EnumSet;
+import java.util.Arrays;
 import java.util.List;
+
+import static apps.aleonqe.com.lintvalidator.compliance.Constants.ISSUE_FORBIDDEN_METHOD_ACCESS;
+import static apps.aleonqe.com.lintvalidator.correctness.Constants.ISSUE_NAMING_PATTERN;
 
 public class MyIssueRegistry extends IssueRegistry {
 
-    static final Issue ISSUE_NAMING_PATTERN = Issue.create("NamingPattern",
-            "Names should be well named.",
-            "Camel case notations should be followed in Java and Kotlin files",
-            Category.CORRECTNESS,
-            5,
-            Severity.WARNING,
-            new Implementation(NamingPatternDetector.class,
-                    EnumSet.of(Scope.JAVA_FILE, Scope.TEST_SOURCES))
-    );
 
     @Override
     public int getApi() {
@@ -33,6 +22,6 @@ public class MyIssueRegistry extends IssueRegistry {
     @NotNull
     @Override
     public List<Issue> getIssues() {
-        return Collections.singletonList(ISSUE_NAMING_PATTERN);
+        return Arrays.asList(ISSUE_FORBIDDEN_METHOD_ACCESS, ISSUE_NAMING_PATTERN);
     }
 }

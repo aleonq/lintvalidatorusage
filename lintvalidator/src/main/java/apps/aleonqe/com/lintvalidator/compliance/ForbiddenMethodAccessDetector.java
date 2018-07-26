@@ -1,4 +1,4 @@
-package apps.aleonqe.com.lintvalidator;
+package apps.aleonqe.com.lintvalidator.compliance;
 
 import com.android.tools.lint.client.api.UElementHandler;
 import com.android.tools.lint.detector.api.Detector;
@@ -11,7 +11,7 @@ import org.jetbrains.uast.UElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NamingPatternDetector extends Detector implements Detector.UastScanner {
+public class ForbiddenMethodAccessDetector extends Detector implements Detector.UastScanner {
     @Nullable
     @Override
     public List<Class<? extends UElement>> getApplicableUastTypes() {
@@ -23,6 +23,7 @@ public class NamingPatternDetector extends Detector implements Detector.UastScan
     @Nullable
     @Override
     public UElementHandler createUastHandler(JavaContext context) {
-        return new NamingPatternHandler(context);
+//        System.out.println("createUastHandler():\n" + UastUtils.asRecursiveLogString(context.getUastFile()));
+        return new ForbiddenMethodAccessHandler(context);
     }
 }

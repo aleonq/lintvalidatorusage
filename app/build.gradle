@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+//    lintOptions {
+//        // set to true to turn off analysis progress reporting by lint
+//        quiet false
+//        // if true, stop the gradle build if errors are found
+//        abortOnError true
+//        // if true, only report errors
+//        ignoreWarnings false
+//    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "apps.aleonqe.com.lintvalidarotsample"

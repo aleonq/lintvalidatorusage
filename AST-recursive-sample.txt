@@ -1,0 +1,120 @@
+Detector:
+    @Nullable
+    @Override
+    public UElementHandler createUastHandler(JavaContext context) {
+        System.out.println("createUastHandler():\n" + UastUtils.asRecursiveLogString(context.getUastFile()));
+        return new NamingPatternHandler(context);
+    }
+
+1=================================================================================
+package apps.aleonqe.com.lintvalidarotsample;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+
+public class MainActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("here you go", "message");
+    }
+}
+
+==
+createUastHandler():   UFile (package = apps.aleonqe.com.lintvalidarotsample)
+    UImportStatement (isOnDemand = false)
+    UImportStatement (isOnDemand = false)
+    UImportStatement (isOnDemand = false)
+    UClass (name = MainActivity)
+        UMethod (name = onCreate)
+            UAnnotation (fqName = java.lang.Override)
+            UParameter (name = savedInstanceState)
+            UBlockExpression
+                UQualifiedReferenceExpression
+                    USuperExpression (label = null)
+                    UCallExpression (kind = UastCallKind(name='method_call'), argCount = 1))
+                        UIdentifier (Identifier (onCreate))
+                        USimpleNameReferenceExpression (identifier = savedInstanceState)
+                UQualifiedReferenceExpression
+                    USimpleNameReferenceExpression (identifier = Log)
+                    UCallExpression (kind = UastCallKind(name='method_call'), argCount = 2))
+                        UIdentifier (Identifier (d))
+                        ULiteralExpression (value = "here you go")
+                        ULiteralExpression (value = "message")
+
+2=========================================================================================================
+package apps.aleonqe.com.lintvalidarotsample;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+import static android.util.Log.d;
+
+public class MainActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        d("here you go", "message");
+    }
+}
+
+==
+reateUastHandler():   UFile (package = apps.aleonqe.com.lintvalidarotsample)
+    UImportStatement (isOnDemand = false)
+    UImportStatement (isOnDemand = false)
+    UImportStatement (isOnDemand = false)
+    UClass (name = MainActivity)
+        UMethod (name = onCreate)
+            UAnnotation (fqName = java.lang.Override)
+            UParameter (name = savedInstanceState)
+            UBlockExpression
+                UQualifiedReferenceExpression
+                    USuperExpression (label = null)
+                    UCallExpression (kind = UastCallKind(name='method_call'), argCount = 1))
+                        UIdentifier (Identifier (onCreate))
+                        USimpleNameReferenceExpression (identifier = savedInstanceState)
+                UCallExpression (kind = UastCallKind(name='method_call'), argCount = 2))
+                    UIdentifier (Identifier (d))
+                    ULiteralExpression (value = "here you go")
+                    ULiteralExpression (value = "message")
+
+3==================================================================================================
+package apps.aleonqe.com.lintvalidarotsample;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class MainActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        android.util.Log.d("here you go", "message");
+    }
+}
+
+==
+createUastHandler():   UFile (package = apps.aleonqe.com.lintvalidarotsample)
+    UImportStatement (isOnDemand = false)
+    UImportStatement (isOnDemand = false)
+    UClass (name = MainActivity)
+        UMethod (name = onCreate)
+            UAnnotation (fqName = java.lang.Override)
+            UParameter (name = savedInstanceState)
+            UBlockExpression
+                UQualifiedReferenceExpression
+                    USuperExpression (label = null)
+                    UCallExpression (kind = UastCallKind(name='method_call'), argCount = 1))
+                        UIdentifier (Identifier (onCreate))
+                        USimpleNameReferenceExpression (identifier = savedInstanceState)
+                UQualifiedReferenceExpression
+                    UQualifiedReferenceExpression
+                        UQualifiedReferenceExpression
+                            USimpleNameReferenceExpression (identifier = android)
+                            USimpleNameReferenceExpression (identifier = util)
+                        USimpleNameReferenceExpression (identifier = Log)
+                    UCallExpression (kind = UastCallKind(name='method_call'), argCount = 2))
+                        UIdentifier (Identifier (d))
+                        ULiteralExpression (value = "here you go")
+                        ULiteralExpression (value = "message")
+
